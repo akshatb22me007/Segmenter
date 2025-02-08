@@ -7,6 +7,8 @@ This repository implements an image segmentation model using **U-Net**, a widely
 - **U-Net architecture** for precise image segmentation  
 - **PyTorch implementation** for flexibility and scalability   
 
+## Environment is manage by astral-uv package manager
+
 ## TODO
 - [X] Added Encoder and Decoder Block
 - [X] Added UNet Architecture
