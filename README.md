@@ -12,7 +12,7 @@ This repository implements an image segmentation model using **U-Net**, a widely
 ## TODO
 - [X] Added Encoder and Decoder Block
 - [X] Added UNet Architecture
-- [ ] To add data download script
+- [X] To add data download script
 - [ ] To add data loading script
 - [ ] To include data augmentaion technique for generalization
 - [ ] To add train.py
