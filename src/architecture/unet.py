@@ -41,10 +41,8 @@ class UNet(nn.Module):
         for i in range(self.model_depth):
             x = self.encoder_blocks[i](x)
             self.encoder_output.append(x)
-            # print(x.shape)
             if self.model_depth-i != 1:
                 x = self.downsample(x)
-            # print(f"after downsample {x.shape}")
         
         
         for i in range(self.model_depth-1):
@@ -54,14 +52,11 @@ class UNet(nn.Module):
                 temp = self.upsample_blocks[i](self.dec_out)
             shape1 = self.encoder_output[-i-2].shape[2]
             shape2 = temp.shape[2]
-            print(shape1,shape2)
             start = (shape1 - shape2) // 2  
             end = start + shape2  
             cropped_tensor = self.encoder_output[-i-2][:, :, start:end, start:end]  
             cat_tensor = torch.cat([cropped_tensor,temp],dim=1)
-            print(cat_tensor.shape)
             self.dec_out = self.decoder_blocks[i](cat_tensor)
-            print(self.dec_out.shape)
 
         final_out = self.out_conv(self.dec_out)
         return final_out
