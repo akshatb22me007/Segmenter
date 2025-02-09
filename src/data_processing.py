@@ -25,17 +25,16 @@ class Caravana(Dataset):
         img = Image.open(img_path).convert("RGB").resize(self.resize_shape)
         mask = Image.open(mask_path).convert("L").resize(self.resize_shape)
 
-        img_np = np.array(img)
-        mask_np = np.array(mask,dtype=np.float32)
-        print(img_np.shape)
-        mask_np[mask_np == 255.0] = 1.0
+        img = np.array(img)
+        mask = np.array(mask,dtype=np.float32)
+        mask[mask == 255.0] = 1.0
 
         if self.transforms is not None:
-            augmentations = self.transforms(image=img_np, mask=mask_np)
-            img_tensor = augmentations["image"]
-            mask_tensor = augmentations["mask"]
+            augmentations = self.transforms(image=img, mask=mask)
+            img = augmentations["image"]
+            mask = augmentations["mask"]
         
-        return img_tensor,mask_tensor
+        return img,mask
 
 ## Example Usage
 if __name__ == "__main__":
