@@ -1,7 +1,7 @@
 # UNet Image Segmenter  
 
 ## Overview  
-This repository implements an image segmentation model using **U-Net**, a widely used deep learning architecture for semantic segmentation. The model is designed to segment objects from images with high accuracy.  
+This repository is an PyTorch implementation of an image segmentation model i.e. **U-Net**, a widely used deep learning architecture for semantic segmentation. The model is designed to segment objects from images with high accuracy.  
 
 ## Features  
 - **U-Net architecture** for precise image segmentation  
@@ -14,8 +14,10 @@ This repository implements an image segmentation model using **U-Net**, a widely
 - [X] Added UNet Architecture
 - [X] To add data download script
 - [X] To add data loading script
-- [ ] To include data augmentaion technique for generalization
-- [ ] To add train.py
+- [X] To include data augmentaion technique for generalization
+- [X] To add train.py
+- [ ] To add evaluate.py
+- [ ] To add inference.py
 
 ## Refrences
 
