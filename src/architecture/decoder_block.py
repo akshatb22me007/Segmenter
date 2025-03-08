@@ -8,12 +8,11 @@ class Decoder_Block(nn.Module):
         self.layers = []
         out_channel = initial_filter//2
         for i in range(num_layers):
-            self.layers.append(nn.Conv2d(initial_filter,out_channel,kernel_size=3))
+            self.layers.append(nn.Conv2d(initial_filter,out_channel,kernel_size=3,padding=1))
             self.layers.append(nn.ReLU())
             initial_filter = out_channel
         self.block = nn.Sequential(*self.layers)
 
     def forward(self,x):
         x = self.block(x)
-        logger.debug(x.shape)
         return x 

@@ -8,12 +8,11 @@ class Encoder_Block(nn.Module):
         self.layers = []
         out_channel = initial_filter
         for i in range(num_layers):
-            self.layers.append(nn.Conv2d(in_channel,out_channel,kernel_size=3))
+            self.layers.append(nn.Conv2d(in_channel,out_channel,kernel_size=3,padding=1))
             self.layers.append(nn.ReLU())
             in_channel=out_channel
         self.block = nn.Sequential(*self.layers)
 
     def forward(self,x):
         x = self.block(x)
-        # logger.debug(x.shape)
         return x

@@ -5,6 +5,8 @@ import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 
 class Caravana(Dataset):
     def __init__(self,image_dir,mask_dir,transforms = None, resize_shape = (200,200)):
@@ -27,7 +29,7 @@ class Caravana(Dataset):
 
         img = np.array(img)
         mask = np.array(mask,dtype=np.float32)
-        mask[mask == 255.0] = 1.0
+        mask[mask == 255.0] = 0.0
 
         if self.transforms is not None:
             augmentations = self.transforms(image=img, mask=mask)
@@ -54,15 +56,16 @@ if __name__ == "__main__":
 )
     dataset = Caravana("../data/imgs","../data/masks",resize_shape=(200,200),transforms=train_transform)
 
-    fig, axes = plt.subplots(1, 2, figsize=(10, 5)) 
+    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
 
-    axes[0].imshow(dataset[0][0].permute(1,2,0)) 
+    axes[0].imshow(dataset[0][0].permute(1, 2, 0).numpy())  # Convert tensor to numpy
     axes[0].set_title("Image")
     axes[0].axis("off")
 
-    axes[1].imshow(dataset[0][1])  
+    axes[1].imshow(dataset[0][1].numpy(), cmap='gray')  # Convert tensor to numpy and set cmap for grayscale
     axes[1].set_title("Mask")
     axes[1].axis("off")
 
-    plt.show()  
+    plt.savefig("sample.png")
+    plt.close()
 
